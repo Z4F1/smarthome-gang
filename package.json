@@ -1,0 +1,18 @@
+{
+  "name": "gangsmartspeil",
+  "version": "0.0.1",
+  "description": "Smart speil som skal henge i gangen",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "nodemon app.js"
+  },
+  "author": "Pelle Pastoor",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "xml-js": "^1.6.11"
+  }
+}

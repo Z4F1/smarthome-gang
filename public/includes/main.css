@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+
+    background-color: black;
+    color: white;
+
+    font-family: Arial;
+}
+
+p {
+    margin: 0;
+}
+
+.weather {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+}
+
+.weather > #weather-grid {
+    display: grid;
+    grid-template-columns: 230px 120px;
+    height: 100px;
+}
+
+.weather > #weather-grid > div {
+    position: relative;
+}
+
+.weather > #weather-grid > div > #temp {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+
+    font-size: 6em;
+}
+
+.weather > #weather-grid > div > #symbol {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -42%);
+
+    filter: brightness(100000%);
+}
+
+.weather > #wind {
+    font-size: 1.5em;
+}
