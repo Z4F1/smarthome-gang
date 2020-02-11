@@ -3,17 +3,26 @@ let text = [
     "I morgen"
 ]
 
-axios.get("/weather")
-    .then((res) => {
-        let data = res.data
-        let today = new Date()
-        let date = new Date(data.date)
+Update()
+setInterval(Update, 120000)
 
-        let daysTo = Math.floor((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)) + 1
+function Update(){
+    axios.get("/weather")
+        .then((res) => {
+            let data = res.data
+            let today = new Date()
+            let date = new Date(data["later"].date.split("T")[0])
 
-        console.log(data)
-        console.log(text[daysTo])
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+            let daysTo = Math.floor((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)) + 1
+
+            console.log(data)
+            console.log(text[daysTo])
+
+            document.getElementById("temp").innerHTML = data["now"].temperature + "&#176;C"
+            document.getElementById("symbol").src = "https://www.yr.no/grafikk/sym/v2017/png/200/" + data["now"].symbol + ".png"
+            document.getElementById("wind").innerHTML = data["now"].windSpeed + " fra " + data["now"].windDir
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}

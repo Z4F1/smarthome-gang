@@ -33,7 +33,7 @@ p {
 .weather > #weather-grid > div > #temp {
     position: absolute;
     top: 50%;
-    left: 0;
+    right: 15px;
     transform: translate(0, -50%);
 
     font-size: 6em;
