@@ -54,3 +54,7 @@ p {
 .weather > #wind {
     font-size: 1.5em;
 }
+
+.weather > #later {
+    margin: 10px;
+}

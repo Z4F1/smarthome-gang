@@ -21,6 +21,8 @@ function Update(){
             document.getElementById("temp").innerHTML = data["now"].temperature + "&#176;C"
             document.getElementById("symbol").src = "https://www.yr.no/grafikk/sym/v2017/png/200/" + data["now"].symbol + ".png"
             document.getElementById("wind").innerHTML = data["now"].windSpeed + " fra " + data["now"].windDir
+
+            document.getElementById("later").innerHTML = "<b>" + text[daysTo] + ":</b> " + data["later"].temperature + "&#176;C med " + data["later"].windSpeed + " fra " + data["later"].windDir
         })
         .catch((err) => {
             console.log(err)
