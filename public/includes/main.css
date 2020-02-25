@@ -17,38 +17,26 @@ p {
 .weather {
     position: absolute;
     top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%);
+    left: 10px;
+    transform: translate(0, -50%);
 
-    text-align: center;
+    text-align: left;
 }
 
 .weather > #weather-grid {
-    display: grid;
-    grid-template-columns: 230px 120px;
-    height: 100px;
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
 }
 
-.weather > #weather-grid > div {
-    position: relative;
+.weather > #weather-grid > #temp {
+    font-size: 6.5em;
 }
 
-.weather > #weather-grid > div > #temp {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translate(0, -50%);
-
-    font-size: 6em;
-}
-
-.weather > #weather-grid > div > #symbol {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(0, -42%);
-
+.weather > #weather-grid > #symbol {
     filter: brightness(100000%);
+    margin: 0 20px;
 }
 
 .weather > #wind {
@@ -56,5 +44,6 @@ p {
 }
 
 .weather > #later {
-    margin: 10px;
+    margin: 10px 0;
+    font-size: 1.2em;
 }
