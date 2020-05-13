@@ -28,3 +28,10 @@ function Update(){
             console.log(err)
         })
 }
+
+setInterval(()=>{
+    const time = new Date()
+    const t = time.getHours() + ":" + time.getMinutes() + "." + time.getSeconds()
+
+    document.getElementById("time").innerHTML = t
+}, 500)
