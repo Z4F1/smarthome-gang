@@ -4,7 +4,9 @@ let text = [
 ]
 
 Update()
-setInterval(Update, 120000)
+setInterval(Update, 60000)
+FastUpdate()
+setInterval(FastUpdate, 5000)
 
 function Update(){
     axios.get("/weather")
@@ -26,6 +28,16 @@ function Update(){
         })
         .catch((err) => {
             console.log(err)
+        })
+}
+
+function FastUpdate(){
+    axios.get("/sonos")
+        .then((res) => {
+            let data = res.data
+
+            document.getElementById("sonos-track").innerHTML = "<b>" + data["title"] + ",</b> by " + data["artist"]
+            document.getElementById("sonos-icon").src = "/includes/icons/" + data["state"] + ".png"
         })
 }
 

@@ -52,3 +52,23 @@ p {
     margin: 10px 0;
     font-size: 1.2em;
 }
+
+.sonos {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.sonos > p {
+    vertical-align: middle;
+}
+
+.sonos > p > #sonos-track {
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+.sonos > p > #sonos-icon {
+    vertical-align: middle;
+    margin-right: 15px;
+}
