@@ -43,7 +43,23 @@ function FastUpdate(){
 
 setInterval(()=>{
     const time = new Date()
-    const t = time.getHours() + ":" + time.getMinutes() + "." + time.getSeconds()
+    
+    let hour = time.getHours()
+    if(time.getHours() < 10){
+        hour = "0" + time.getHours()
+    }
+
+    let min = time.getMinutes()
+    if(time.getMinutes() < 10){
+        min = "0" + time.getMinutes()
+    }
+
+    let sec = time.getSeconds()
+    if(time.getSeconds() < 10){
+        sec = "0" + time.getSeconds()
+    }
+
+    const t = hour + ":" + min + "." + sec
 
     document.getElementById("time").innerHTML = t
 }, 500)
