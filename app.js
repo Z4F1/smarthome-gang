@@ -7,7 +7,7 @@ const xmlParser = require("xml-js")
 
 const { Sonos, Listener } = require('sonos')
  
-const speakers = new Sonos("10.0.0.2")
+const speakers = new Sonos("192.168.0.119")
 
 let weather = {
     "now": {},
@@ -82,11 +82,18 @@ function Update(){
 
 function FastUpdate(){
     speakers.currentTrack().then(track => {
+        
+        console.log(track)
         sonos["title"] = track.title
         sonos["artist"] = track.artist
     })
     
     speakers.getCurrentState().then(d => {
+        console.log(d)
+        if(d == ""){
+            d == "paused"
+        }
+
         sonos["state"] = d;
     })
 }
