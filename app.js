@@ -43,7 +43,7 @@ app.listen(3000, ()=> {
     setInterval(FastUpdate, 5000)
 
     setTimeout(() => {
-        exec("chromium-browser --start-fullscreen http://localhost:3000", (err, stdout, stderr) => {
+        exec("/usr/bin/chromium-browser --start-fullscreen http://localhost:3000", (err, stdout, stderr) => {
             if(err){
                 console.log(err)
                 return
