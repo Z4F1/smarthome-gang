@@ -1,3 +1,4 @@
+const {exec} = require("child_process")
 const express = require("express")
 const app = express()
 
@@ -40,6 +41,17 @@ app.listen(3000, ()=> {
 
     FastUpdate()
     setInterval(FastUpdate, 5000)
+
+    setTimeout(() => {
+        exec("chromium-browser --start-fullscreen http://localhost:3000", (err, stdout, stderr) => {
+            if(err){
+                console.log(err)
+                return
+            }else if(stderr){
+                console.log(stderr)
+            }
+        })
+    }, 5000)
 })
 
 function Update(){
