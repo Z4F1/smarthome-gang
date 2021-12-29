@@ -5,9 +5,7 @@ const morgan = require("morgan")
 const axios = require("axios")
 const xmlParser = require("xml-js")
 
-const { Sonos, Listener } = require('sonos')
- 
-const speakers = new Sonos("192.168.0.119")
+const { DeviceDiscovery, Sonos } = require('sonos')
 
 let weather = {
     "now": {},
@@ -81,19 +79,25 @@ function Update(){
 }
 
 function FastUpdate(){
-    speakers.currentTrack().then(track => {
-        
-        console.log(track)
-        sonos["title"] = track.title
-        sonos["artist"] = track.artist
-    })
-    
-    speakers.getCurrentState().then(d => {
-        console.log(d)
-        if(d == ""){
-            d == "paused"
+    DeviceDiscovery(function(){ this.destroy() }).once('DeviceAvailable', async (devices) => {
+        const groups = await devices.getAllGroups()
+        let device
+        for (let group of groups){
+            if(group.Name.includes("Family Room")){
+                device = new Sonos(group.host, group.port)
+            }
         }
-
-        sonos["state"] = d;
+        const state = await device.getCurrentState()
+        const track = await device.currentTrack()
+        if (track.duration && track.duration != 0){
+            sonos["title"] = track.title
+            sonos["artist"] = track.artist
+        }
+        if(state == "playing"){
+            sonos["state"] = state
+        }else {
+            sonos["state"] = "paused"
+        }
     })
 }
+
