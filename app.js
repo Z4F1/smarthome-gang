@@ -5,9 +5,19 @@ const morgan = require("morgan")
 const axios = require("axios")
 const xmlParser = require("xml-js")
 
+const { Sonos, Listener } = require('sonos')
+ 
+const speakers = new Sonos("192.168.0.119")
+
 let weather = {
     "now": {},
     "later": {}
+}
+
+let sonos = {
+    "artist": "",
+    "title": "",
+    "state": ""
 }
 
 app.use(morgan("short"))
@@ -18,11 +28,18 @@ app.get("/weather", (req, res) => {
     res.json(weather)
 })
 
+app.get("/sonos", (req, res) => {
+    res.json(sonos);
+})
+
 app.listen(3000, ()=> {
     console.log("Listening to *3000")
 
     Update()
     setInterval(Update, 120000)
+
+    FastUpdate()
+    setInterval(FastUpdate, 5000)
 })
 
 function Update(){
@@ -61,4 +78,22 @@ function Update(){
         .catch((err) => {
             console.log(err)
         })
+}
+
+function FastUpdate(){
+    speakers.currentTrack().then(track => {
+        
+        console.log(track)
+        sonos["title"] = track.title
+        sonos["artist"] = track.artist
+    })
+    
+    speakers.getCurrentState().then(d => {
+        console.log(d)
+        if(d == ""){
+            d == "paused"
+        }
+
+        sonos["state"] = d;
+    })
 }
