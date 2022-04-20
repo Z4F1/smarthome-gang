@@ -50,27 +50,10 @@ function Update(){
             weather["now"].temperature = temp.temperature._attributes.value
             weather["now"].windDir = temp.windDirection._attributes.name
             weather["now"].windSpeed = temp.windSpeed._attributes.name
+            weather["now"].cloudiness = temp.cloudiness._attributes.percent
             weather["now"].date = new Date(data.weatherdata.product.time[0])
 
             console.log("Weather now successfull!")
-
-            temp = null
-
-            for(let i = 0; i < data.weatherdata.product.time.length; i++){
-                if(data.weatherdata.product.time[i]._attributes.from.split("T")[1] == "15:00:00"){
-                    temp = data.weatherdata.product.time[i].location
-                    break;
-                }
-            }
-
-            weather["later"].temperature = temp.temperature._attributes.value
-            weather["later"].info = temp.symbol._attributes.name
-            weather["later"].symbol = temp.symbol._attributes.var
-            weather["later"].windDir = temp.windDirection._attributes.name
-            weather["later"].windSpeed = temp.windSpeed._attributes.name
-            weather["later"].date = new Date(temp._attributes.from)
-
-            console.log("Weather later successfull!")
         })
         .catch((err) => {
             console.log(err)
