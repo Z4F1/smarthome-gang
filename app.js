@@ -41,25 +41,24 @@ app.listen(3000, ()=> {
 })
 
 function Update(){
-    axios.get("https://www.yr.no/sted/Norge/postnummer/3440/varsel_time_for_time.xml")
+    axios.get("https://api.met.no/weatherapi/locationforecast/2.0/classic?lat=59.7484259&lon=10.3603469", {headers: {"User-Agent": "SmartSpeil pelle.pastoor@hotmail.com"}})
         .then((res) => {
             let data = xmlParser.xml2js(res.data, {compact:true, space: 4})
-            let temp = data.weatherdata.forecast.tabular.time[0]
+	    console.log(data)
+            let temp = data.weatherdata.product.time[0].location
 
             weather["now"].temperature = temp.temperature._attributes.value
-            weather["now"].info = temp.symbol._attributes.name
-            weather["now"].symbol = temp.symbol._attributes.var
             weather["now"].windDir = temp.windDirection._attributes.name
             weather["now"].windSpeed = temp.windSpeed._attributes.name
-            weather["now"].date = new Date(temp._attributes.from)
+            weather["now"].date = new Date(data.weatherdata.product.time[0])
 
             console.log("Weather now successfull!")
 
             temp = null
 
-            for(let i = 0; i < data.weatherdata.forecast.tabular.time.length; i++){
-                if(data.weatherdata.forecast.tabular.time[i]._attributes.from.split("T")[1] == "15:00:00"){
-                    temp = data.weatherdata.forecast.tabular.time[i]
+            for(let i = 0; i < data.weatherdata.product.time.length; i++){
+                if(data.weatherdata.product.time[i]._attributes.from.split("T")[1] == "15:00:00"){
+                    temp = data.weatherdata.product.time[i].location
                     break;
                 }
             }
